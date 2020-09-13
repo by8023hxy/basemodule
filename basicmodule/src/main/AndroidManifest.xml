@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baiyu.androidx.basicmodule">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application>
+        <provider
+            android:name=".App"
+            android:authorities="${applicationId}.KtxInstaller"
+            android:exported="false" />
+    </application>
+</manifest>
