@@ -8,19 +8,6 @@ import com.baiyu.androidx.basicmodule.view.decoration.HorizontalDecoration
 import com.baiyu.androidx.basicmodule.view.decoration.SpaceItemDecoration
 
 
-/**
- * @ProjectName:AgentHmi
- * @Author:BaiYu
- * @Email:baiyu@autoai.com
- * @Time:2020/8/21 15:51
- * @description：
- */
-
-@BindingAdapter("adapter")
-fun RecyclerView.adapter(adapter: RecyclerView.Adapter<*>) {
-    setAdapter(adapter)
-}
-
 fun RecyclerView.itemDecoration() {
     this.addItemDecoration(
         HorizontalDecoration().setColor(Color.parseColor("#19FFFFFF"))
