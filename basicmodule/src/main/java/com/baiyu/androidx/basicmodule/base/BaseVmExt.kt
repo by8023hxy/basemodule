@@ -9,6 +9,7 @@ import com.baiyu.androidx.basicmodule.livedata.StatefulMutableLiveData
 import com.baiyu.androidx.basicmodule.livedata.postEventValue
 import com.baiyu.androidx.basicmodule.network.ApiException
 import com.baiyu.androidx.basicmodule.util.ExceptionUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ fun <T> BaseViewModel.flowRequest(
         isShowDialog: Boolean = true,
         loadingMessage: String = "数据加载中..."
 ) {
-    viewModelScope.launch {
+    viewModelScope.launch(Dispatchers.IO) {
         request().onStart {
             if (isShowDialog) loadingChange.showDialog.postEventValue(loadingMessage)
         }.onCompletion {
@@ -51,7 +52,7 @@ fun <T> BaseViewModel.flowRequestNoCheck(
     isShowDialog: Boolean = true,
     loadingMessage: String = "数据加载中..."
 ) {
-    viewModelScope.launch {
+    viewModelScope.launch(Dispatchers.IO)  {
         request().onStart {
             if (isShowDialog) loadingChange.showDialog.postEventValue(loadingMessage)
         }.onCompletion {

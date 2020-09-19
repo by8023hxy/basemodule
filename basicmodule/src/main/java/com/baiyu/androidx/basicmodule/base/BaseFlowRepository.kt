@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.flowOn
  */
 fun <T> flowRequest(request: suspend () -> BaseResponse<T>): Flow<T> {
     return flow {
-
         val response = request()
 
         when (response.getResponseCode()) {

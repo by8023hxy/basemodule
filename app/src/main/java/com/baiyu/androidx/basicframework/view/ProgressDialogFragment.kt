@@ -65,7 +65,7 @@ class ProgressDialogFragment : DialogFragment() {
     private fun getFocus() {
         requireView().isFocusableInTouchMode = true
         requireView().requestFocus()
-        requireView().setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent -> event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK }
+        requireView().setOnKeyListener { _: View?, keyCode: Int, event: KeyEvent -> event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK }
     }
 
 }

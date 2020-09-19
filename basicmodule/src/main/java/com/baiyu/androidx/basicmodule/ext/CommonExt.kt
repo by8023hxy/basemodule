@@ -120,6 +120,10 @@ fun <T : View> View.findViewOften(viewId: Int): T {
     }
     return childView as T
 }
+/**
+ * whether string only contains digits
+ */
+fun String.areDigitsOnly() = matches(Regex("[0-9]+"))
 
 
 

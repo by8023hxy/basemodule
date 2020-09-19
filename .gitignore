@@ -1,1 +1,3 @@
 /.idea
+/build/intermediates/lint-cache/
+/.gradle

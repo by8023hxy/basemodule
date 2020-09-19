@@ -8,6 +8,7 @@ import com.baiyu.androidx.basicmodule.BuildConfig
 const val TAG = "BasicModule: "
 
 var showLog = BuildConfig.DEBUG
+var showStackTrace = true
 
 private enum class LEVEL {
     V, D, I, W, E
@@ -30,11 +31,17 @@ fun String.logE(tag: String = TAG) =
 
 private fun log(level: LEVEL, tag: String, message: String) {
     if (!showLog) return
+    val tagBuilder = StringBuilder()
+    tagBuilder.append(tag)
+    if (showStackTrace){
+        val stackTrace = Thread.currentThread().stackTrace[5]
+        tagBuilder.append(" ${stackTrace.methodName}(${stackTrace.fileName}:${stackTrace.lineNumber})")
+    }
     when (level) {
-        LEVEL.V -> Log.v(tag, message)
-        LEVEL.D -> Log.d(tag, message)
-        LEVEL.I -> Log.i(tag, message)
-        LEVEL.W -> Log.w(tag, message)
-        LEVEL.E -> Log.e(tag, message)
+        LEVEL.V -> Log.v(tagBuilder.toString(), message)
+        LEVEL.D -> Log.d(tagBuilder.toString(), message)
+        LEVEL.I -> Log.i(tagBuilder.toString(), message)
+        LEVEL.W -> Log.w(tagBuilder.toString(), message)
+        LEVEL.E -> Log.e(tagBuilder.toString(), message)
     }
 }
