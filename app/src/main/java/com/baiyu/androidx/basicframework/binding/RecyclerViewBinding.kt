@@ -1,4 +1,3 @@
-
 package com.baiyu.androidx.basicframework.binding
 
 import androidx.databinding.BindingAdapter
@@ -19,5 +18,5 @@ fun bindAdapterList(view: RecyclerView, bannerList: List<BannerInfo>?) {
     bannerList.whatIfNotNullOrEmpty {
         (view.adapter as? DemoAdapter)?.addBannerList(it)
     }
-    view.addItemDecoration(SpaceItemDecoration(0,0,10,0))
+    view.addItemDecoration(SpaceItemDecoration(0, 0, 10, 0))
 }

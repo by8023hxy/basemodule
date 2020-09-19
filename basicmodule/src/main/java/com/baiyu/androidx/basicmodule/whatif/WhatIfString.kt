@@ -6,12 +6,12 @@ package com.baiyu.androidx.basicmodule.whatif
 /** An expression for invoking [whatIf] when the [String] is not null and not empty. */
 @WhatIfInlineOnly
 inline fun String?.whatIfNotNullOrEmpty(
-        whatIf: (String) -> Unit
+    whatIf: (String) -> Unit
 ) {
 
     this.whatIfNotNullOrEmpty(
-            whatIf = { whatIf(it) },
-            whatIfNot = { }
+        whatIf = { whatIf(it) },
+        whatIfNot = { }
     )
 }
 
@@ -21,8 +21,8 @@ inline fun String?.whatIfNotNullOrEmpty(
  */
 @WhatIfInlineOnly
 inline fun String?.whatIfNotNullOrEmpty(
-        whatIf: (String) -> Unit,
-        whatIfNot: () -> Unit
+    whatIf: (String) -> Unit,
+    whatIfNot: () -> Unit
 ) {
 
     if (!this.isNullOrEmpty()) {

@@ -13,5 +13,5 @@ object BaseConstant {
     const val HTTP_READ_TIME: Long = 30
     const val HTTP_WRITE_TIME: Long = 30
 
-    const val BASE_URL=""
+    const val BASE_URL = ""
 }

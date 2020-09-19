@@ -1,4 +1,5 @@
 @file:Suppress("unused")
+
 package com.baiyu.androidx.basicmodule.livedata
 
 import androidx.annotation.MainThread
@@ -16,9 +17,9 @@ typealias EventLiveData<T> = LiveData<Event<T>>
  */
 @MainThread
 inline fun <T> EventLiveData<T>.observeSingleEvent(
-        owner: LifecycleOwner,
-        viewModelStore: ViewModelStore,
-        crossinline onChanged: (T) -> Unit
+    owner: LifecycleOwner,
+    viewModelStore: ViewModelStore,
+    crossinline onChanged: (T) -> Unit
 ): Observer<Event<T>> {
     val wrappedObserver = Observer<Event<T>> { t ->
         //数据没有被使用过则发送给调用者，否则不处理
@@ -35,8 +36,8 @@ inline fun <T> EventLiveData<T>.observeSingleEvent(
  */
 @MainThread
 inline fun <T> EventMutableLiveData<T>.observeEvent(
-        owner: LifecycleOwner,
-        crossinline onChanged: (T) -> Unit
+    owner: LifecycleOwner,
+    crossinline onChanged: (T) -> Unit
 ): Observer<Event<T>> {
     val wrappedObserver = Observer<Event<T>> { t ->
         //数据没有被使用过则发送给调用者，否则不处理
@@ -51,8 +52,8 @@ inline fun <T> EventMutableLiveData<T>.observeEvent(
 
 @MainThread
 inline fun <T> EventLiveData<T>.observeEvent(
-        owner: LifecycleOwner,
-        crossinline onChanged: (T) -> Unit
+    owner: LifecycleOwner,
+    crossinline onChanged: (T) -> Unit
 ): Observer<Event<T>> {
     val wrappedObserver = Observer<Event<T>> { t ->
         onChanged.invoke(t.peekContent())

@@ -58,7 +58,7 @@ open class BaseDecoration : RecyclerView.ItemDecoration() {
     }
 
 
-   override fun getItemOffsets(
+    override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,

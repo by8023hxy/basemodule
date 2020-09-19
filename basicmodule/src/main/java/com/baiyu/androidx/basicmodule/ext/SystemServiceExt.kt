@@ -30,7 +30,7 @@ import androidx.core.content.ContextCompat
  * Return system service which type is [T]
  */
 inline fun <reified T> Context.getSystemService(): T? =
-        ContextCompat.getSystemService(this, T::class.java)
+    ContextCompat.getSystemService(this, T::class.java)
 
 val Context.windowManager get() = getSystemService<WindowManager>()
 val Context.clipboardManager get() = getSystemService<ClipboardManager>()

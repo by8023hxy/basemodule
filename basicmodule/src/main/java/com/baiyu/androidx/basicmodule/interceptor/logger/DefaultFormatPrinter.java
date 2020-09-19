@@ -37,6 +37,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
     private static final String CENTER_LINE = "├ ";
     private static final String DEFAULT_LINE = "│ ";
     private static final String[] ARMS = new String[]{"-A-", "-R-", "-M-", "-S-"};
+    private static final int COMPUTE_LAST = 4;
     private static ThreadLocal<Integer> last = new ThreadLocal<Integer>() {
         @Override
         protected Integer initialValue() {
@@ -67,8 +68,6 @@ public class DefaultFormatPrinter implements FormatPrinter {
             }
         }
     }
-
-    private static final int COMPUTE_LAST = 4;
 
     private static String computeKey() {
         if (last.get() >= COMPUTE_LAST) {

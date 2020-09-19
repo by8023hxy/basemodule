@@ -1,6 +1,5 @@
 package com.baiyu.androidx.basicframework.repository
 
-import androidx.databinding.ObservableBoolean
 import com.baiyu.androidx.basicmodule.livedata.BooleanLiveData
 
 /**

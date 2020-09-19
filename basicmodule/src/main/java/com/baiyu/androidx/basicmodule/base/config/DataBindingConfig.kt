@@ -1,7 +1,6 @@
 package com.baiyu.androidx.basicmodule.base.config
 
 import android.util.SparseArray
-import androidx.lifecycle.ViewModel
 import com.baiyu.androidx.basicmodule.base.BaseViewModel
 
 /**

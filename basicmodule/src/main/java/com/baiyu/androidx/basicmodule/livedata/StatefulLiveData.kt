@@ -1,4 +1,5 @@
 @file:Suppress("unused")
+
 package com.baiyu.androidx.basicmodule.livedata
 
 import androidx.annotation.MainThread
@@ -14,10 +15,10 @@ typealias StatefulMutableLiveData<T> = MutableLiveData<RequestState<T>>
 
 @MainThread
 inline fun <T> StatefulLiveData<T>.observeState(
-        owner: LifecycleOwner,
-        crossinline onLoading: () -> Unit = {},
-        crossinline onSuccess: (T?) -> Unit = {},
-        crossinline onError: (ApiException?) -> Unit = {}
+    owner: LifecycleOwner,
+    crossinline onLoading: () -> Unit = {},
+    crossinline onSuccess: (T?) -> Unit = {},
+    crossinline onError: (ApiException?) -> Unit = {}
 ) {
     observe(owner) { state ->
         when (state) {
@@ -30,8 +31,8 @@ inline fun <T> StatefulLiveData<T>.observeState(
 
 @MainThread
 inline fun <T> StatefulLiveData<T>.observeState(
-        owner: LifecycleOwner,
-        init: ResultBuilder<T>.() -> Unit
+    owner: LifecycleOwner,
+    init: ResultBuilder<T>.() -> Unit
 ) {
     val result = ResultBuilder<T>().apply(init)
 

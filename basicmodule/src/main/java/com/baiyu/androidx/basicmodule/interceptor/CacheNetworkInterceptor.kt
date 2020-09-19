@@ -7,7 +7,7 @@ class CacheNetworkInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder().removeHeader("Pragma")
-                .addHeader("Cache-Control", "max-age=60").build()
+            .addHeader("Cache-Control", "max-age=60").build()
         return chain.proceed(request)
     }
 }

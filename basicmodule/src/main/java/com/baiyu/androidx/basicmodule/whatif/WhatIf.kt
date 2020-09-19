@@ -17,8 +17,8 @@ package com.baiyu.androidx.basicmodule.whatif
 /** An expression for invoking [whatIf] when the [given] boolean is true. */
 @WhatIfInlineOnly
 inline fun <T> T.whatIf(
-        given: (T) -> Boolean?,
-        whatIf: () -> Unit
+    given: (T) -> Boolean?,
+    whatIf: () -> Unit
 ) {
 
     if (given(this) == true) {
@@ -32,9 +32,9 @@ inline fun <T> T.whatIf(
  */
 @WhatIfInlineOnly
 inline fun <T> T.whatIf(
-        given: (T) -> Boolean?,
-        whatIf: () -> Unit,
-        whatIfNot: () -> Unit
+    given: (T) -> Boolean?,
+    whatIf: () -> Unit,
+    whatIfNot: () -> Unit
 ) {
 
     if (given(this) == true) {
@@ -50,8 +50,8 @@ inline fun <T> T.whatIf(
  */
 @WhatIfInlineOnly
 inline fun <T> T.whatIf(
-        given: Boolean?,
-        whatIf: T.() -> Unit
+    given: Boolean?,
+    whatIf: T.() -> Unit
 ): T {
 
     if (given == true) {
@@ -67,9 +67,9 @@ inline fun <T> T.whatIf(
  */
 @WhatIfInlineOnly
 inline fun <T> T.whatIf(
-        given: Boolean?,
-        whatIf: T.() -> Unit,
-        whatIfNot: T.() -> Unit
+    given: Boolean?,
+    whatIf: T.() -> Unit,
+    whatIfNot: T.() -> Unit
 ): T {
 
     if (given == true) {
@@ -86,14 +86,14 @@ inline fun <T> T.whatIf(
  */
 @WhatIfInlineOnly
 inline fun <T> T.whatIf(
-        given: () -> Boolean?,
-        whatIfDo: T.() -> Unit
+    given: () -> Boolean?,
+    whatIfDo: T.() -> Unit
 ): T {
 
     return this.whatIf(
-            given = given,
-            whatIfDo = { whatIfDo() },
-            whatIfNot = { }
+        given = given,
+        whatIfDo = { whatIfDo() },
+        whatIfNot = { }
     )
 }
 
@@ -104,9 +104,9 @@ inline fun <T> T.whatIf(
  */
 @WhatIfInlineOnly
 inline fun <T> T.whatIf(
-        given: () -> Boolean?,
-        whatIfDo: T.() -> Unit,
-        whatIfNot: T.() -> Unit
+    given: () -> Boolean?,
+    whatIfDo: T.() -> Unit,
+    whatIfNot: T.() -> Unit
 ): T {
 
     if (given() == true) {
@@ -124,15 +124,15 @@ inline fun <T> T.whatIf(
  */
 @WhatIfInlineOnly
 inline fun <T, R> T.whatIfLet(
-        given: Boolean?,
-        default: R,
-        whatIf: (T) -> R
+    given: Boolean?,
+    default: R,
+    whatIf: (T) -> R
 ): R {
 
     return this.whatIfLet(
-            given = given,
-            whatIf = { whatIf(it) },
-            whatIfNot = { default }
+        given = given,
+        whatIf = { whatIf(it) },
+        whatIfNot = { default }
     )
 }
 
@@ -143,9 +143,9 @@ inline fun <T, R> T.whatIfLet(
  */
 @WhatIfInlineOnly
 inline fun <T, R> T.whatIfLet(
-        given: Boolean?,
-        whatIf: (T) -> R,
-        whatIfNot: (T) -> R
+    given: Boolean?,
+    whatIf: (T) -> R,
+    whatIfNot: (T) -> R
 ): R {
 
     if (given == true) {
@@ -157,12 +157,12 @@ inline fun <T, R> T.whatIfLet(
 /** An expression for invoking [whatIf] when the [T] target object is not null. */
 @WhatIfInlineOnly
 inline fun <T> T?.whatIfNotNull(
-        whatIf: (T) -> Unit
+    whatIf: (T) -> Unit
 ) {
 
     this.whatIfNotNull(
-            whatIf = { whatIf(it) },
-            whatIfNot = { }
+        whatIf = { whatIf(it) },
+        whatIfNot = { }
     )
 }
 
@@ -172,8 +172,8 @@ inline fun <T> T?.whatIfNotNull(
  */
 @WhatIfInlineOnly
 inline fun <T> T?.whatIfNotNull(
-        whatIf: (T) -> Unit,
-        whatIfNot: (T?) -> Unit
+    whatIf: (T) -> Unit,
+    whatIfNot: (T?) -> Unit
 ) {
 
     if (this != null) {
@@ -189,7 +189,7 @@ inline fun <T> T?.whatIfNotNull(
  */
 @WhatIfInlineOnly
 inline fun <reified R> Any?.whatIfNotNullAs(
-        whatIf: (R) -> Unit
+    whatIf: (R) -> Unit
 ) {
 
     if (this != null) {
@@ -204,8 +204,8 @@ inline fun <reified R> Any?.whatIfNotNullAs(
  */
 @WhatIfInlineOnly
 inline fun <reified R> Any?.whatIfNotNullAs(
-        whatIf: (R) -> Unit,
-        whatIfNot: () -> Unit
+    whatIf: (R) -> Unit,
+    whatIfNot: () -> Unit
 ) {
 
     if (this != null) {
@@ -222,8 +222,8 @@ inline fun <reified R> Any?.whatIfNotNullAs(
  */
 @WhatIfInlineOnly
 inline fun <T, R> T?.whatIfNotNullWith(
-        whatIf: (T) -> R,
-        whatIfNot: (T?) -> R
+    whatIf: (T) -> R,
+    whatIfNot: (T?) -> R
 ): R {
 
     if (this != null) {
@@ -235,12 +235,12 @@ inline fun <T, R> T?.whatIfNotNullWith(
 /** An expression for invoking [whatIf] when the target object is not null and true. */
 @WhatIfInlineOnly
 inline fun Boolean?.whatIf(
-        whatIf: () -> Unit
+    whatIf: () -> Unit
 ) {
 
     this.whatIf(
-            whatIf = { whatIf() },
-            whatIfNot = { }
+        whatIf = { whatIf() },
+        whatIfNot = { }
     )
 }
 
@@ -250,8 +250,8 @@ inline fun Boolean?.whatIf(
  */
 @WhatIfInlineOnly
 inline fun Boolean?.whatIf(
-        whatIf: () -> Unit,
-        whatIfNot: () -> Unit
+    whatIf: () -> Unit,
+    whatIfNot: () -> Unit
 ) {
 
     if (this == true) {
@@ -264,7 +264,7 @@ inline fun Boolean?.whatIf(
 /** An expression for invoking [whatIf] when the target object is not null and false. */
 @WhatIfInlineOnly
 inline fun Boolean?.whatIfElse(
-        whatIf: () -> Unit
+    whatIf: () -> Unit
 ) {
 
     if (this == false) {
@@ -275,8 +275,8 @@ inline fun Boolean?.whatIfElse(
 /** An expression for invoking [whatIf] when the target Boolean is true and the [predicate] is also true. */
 @WhatIfInlineOnly
 inline fun Boolean?.whatIfAnd(
-        predicate: Boolean?,
-        whatIf: () -> Unit
+    predicate: Boolean?,
+    whatIf: () -> Unit
 ) {
 
     if (this == true && predicate == true) {
@@ -287,8 +287,8 @@ inline fun Boolean?.whatIfAnd(
 /** An expression for invoking [whatIf] when the target Boolean is true or the [predicate] is true. */
 @WhatIfInlineOnly
 inline fun Boolean?.whatIfOr(
-        predicate: Boolean?,
-        whatIf: () -> Unit
+    predicate: Boolean?,
+    whatIf: () -> Unit
 ) {
 
     if (this == true || predicate == true) {

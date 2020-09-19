@@ -1,7 +1,6 @@
 package com.baiyu.androidx.basicmodule.base
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.baiyu.androidx.basicmodule.event.RequestState

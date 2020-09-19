@@ -9,9 +9,10 @@ import retrofit2.http.GET
  * @version: 1.0
  */
 interface RemoteService {
-    companion object{
-        const val BASE_URL="https://www.wanandroid.com/"
+    companion object {
+        const val BASE_URL = "https://www.wanandroid.com/"
     }
+
     @GET("banner/json")
-    suspend fun getBanner() : ApiResponse<List<BannerInfo>>
+    suspend fun getBanner(): ApiResponse<List<BannerInfo>>
 }

@@ -42,6 +42,14 @@ public class CharacterHandler {
             return null;
         }
     };
+    /**
+     * json 格式化
+     *
+     * @param json
+     * @return
+     */
+    private static final String LEFT_KH = "{";
+    private static final String LEFT_ZKH = "[";
 
     private CharacterHandler() {
         throw new IllegalStateException("you can't instantiate me!");
@@ -67,15 +75,6 @@ public class CharacterHandler {
         }
         return sb.toString().trim();
     }
-
-    /**
-     * json 格式化
-     *
-     * @param json
-     * @return
-     */
-    private static final String LEFT_KH = "{";
-    private static final String LEFT_ZKH = "[";
 
     public static String jsonFormat(String json) {
         if (TextUtils.isEmpty(json)) {

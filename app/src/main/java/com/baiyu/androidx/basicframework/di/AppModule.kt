@@ -4,9 +4,9 @@ import com.baiyu.androidx.basicframework.MyApp
 import com.baiyu.androidx.basicframework.http.RemoteService
 import com.baiyu.androidx.basicframework.repository.AppRepository
 import com.baiyu.androidx.basicframework.ui.main.MainViewModel
+import com.baiyu.androidx.basicframework.util.MMKVUtil
 import com.baiyu.androidx.basicmodule.BaseConstant
 import com.baiyu.androidx.basicmodule.ShareViewModel
-import com.baiyu.androidx.basicmodule.base.BaseApp
 import com.baiyu.androidx.basicmodule.interceptor.CacheInterceptor
 import com.baiyu.androidx.basicmodule.interceptor.CacheNetworkInterceptor
 import com.baiyu.androidx.basicmodule.interceptor.logger.LogInterceptor
@@ -19,7 +19,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -35,13 +34,14 @@ val baseModule = module {
         ShareViewModel()
     }
     single {
-        com.baiyu.androidx.basicframework.util.MMKVUtil(get())
+        MMKVUtil(get())
     }
     single<MMKV> {
         MMKV.mmkvWithID(
             BaseConstant.MMKV_ID,
             MMKV.MULTI_PROCESS_MODE,
-            BaseConstant.MMKV_CRYPT_KEY)
+            BaseConstant.MMKV_CRYPT_KEY
+        )
     }
 }
 
@@ -60,19 +60,11 @@ val httpModule = module {
             .addInterceptor(CacheInterceptor())
             .addInterceptor(LogInterceptor())    // 日志拦截器
             .addNetworkInterceptor(CacheNetworkInterceptor())
-            .connectTimeout(BaseConstant.HTTP_WRITE_TIME, TimeUnit.SECONDS)
+            .connectTimeout(BaseConstant.HTTP_CONNECT_TIME, TimeUnit.SECONDS)
             .readTimeout(BaseConstant.HTTP_READ_TIME, TimeUnit.SECONDS)
-            .writeTimeout(BaseConstant.HTTP_CONNECT_TIME, TimeUnit.SECONDS)
+            .writeTimeout(BaseConstant.HTTP_WRITE_TIME, TimeUnit.SECONDS)
             .build()
     }
-//    single<Retrofit> {
-//        Retrofit.Builder()
-//            .client(get())
-//            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-//            .baseUrl(RemoteService.BASE_URL)
-//            .build()
-//    }
     single<RemoteService> {
         Retrofit.Builder()
             .client(get())

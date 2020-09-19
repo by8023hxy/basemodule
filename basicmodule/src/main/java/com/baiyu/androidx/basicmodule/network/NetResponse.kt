@@ -12,13 +12,15 @@ sealed class NetResponse<out T> {
     data class Failure<T>(val response: BaseResponse<T>) : NetResponse<T>() {
         private val errorCode = response.getResponseCode()
         private val errorMsg = response.getResponseMsg()
-        override fun toString(): String = "[MusicResponse.Failure] (errorCode=$errorCode errorMsg=$errorMsg)"
+        override fun toString(): String =
+            "[MusicResponse.Failure] (errorCode=$errorCode errorMsg=$errorMsg)"
     }
 
     data class Exception<T>(val exception: ApiException) : NetResponse<T>() {
         private val errorMsg: String? = exception.errorMessage
         private val errorCode = exception.errorCode
-        override fun toString(): String = "[MusicResponse.Exception](errorCode=$errorCode errorMsg=$errorMsg)"
+        override fun toString(): String =
+            "[MusicResponse.Exception](errorCode=$errorCode errorMsg=$errorMsg)"
     }
 
 }

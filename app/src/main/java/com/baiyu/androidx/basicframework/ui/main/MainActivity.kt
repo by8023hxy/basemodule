@@ -18,8 +18,8 @@ class MainActivity : DataBindingActivity() {
 
     private val dialog: ProgressDialogFragment by lazy { ProgressDialogFragment() }
     override fun getDataBindingConfig(): DataBindingConfig {
-        return DataBindingConfig(R.layout.activity_main,BR.vm,mainViewModel)
-            .addBindingParam(BR.adapter,DemoAdapter())
+        return DataBindingConfig(R.layout.activity_main, BR.vm, mainViewModel)
+            .addBindingParam(BR.adapter, DemoAdapter())
     }
 
     override fun initView() {

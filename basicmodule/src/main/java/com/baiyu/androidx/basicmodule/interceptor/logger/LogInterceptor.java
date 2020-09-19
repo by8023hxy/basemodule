@@ -4,7 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-
 import com.baiyu.androidx.basicmodule.util.CharacterHandler;
 import com.baiyu.androidx.basicmodule.util.UrlEncoderUtils;
 import com.baiyu.androidx.basicmodule.util.ZipHelper;
@@ -31,8 +30,17 @@ import okio.BufferedSource;
 
 public class LogInterceptor implements Interceptor {
 
+    /**
+     * 解析服务器响应的内容
+     *
+     * @param responseBody {@link ResponseBody}
+     * @param encoding     编码类型
+     * @param clone        克隆后的服务器响应内容
+     * @return 解析后的响应结果
+     */
+    private static final String G_ZIP = "gzip";
+    private static final String Z_LIB = "zlib";
     private FormatPrinter mPrinter = new DefaultFormatPrinter();
-
     private Level printLevel = Level.ALL;
 
     public LogInterceptor() {
@@ -228,17 +236,6 @@ public class LogInterceptor implements Interceptor {
             return "{\"error\": \"" + e.getMessage() + "\"}";
         }
     }
-
-    /**
-     * 解析服务器响应的内容
-     *
-     * @param responseBody {@link ResponseBody}
-     * @param encoding     编码类型
-     * @param clone        克隆后的服务器响应内容
-     * @return 解析后的响应结果
-     */
-    private static final String G_ZIP = "gzip";
-    private static final String Z_LIB = "zlib";
 
     private String parseContent(ResponseBody responseBody, String encoding, Buffer clone) {
         Charset charset = StandardCharsets.UTF_8;

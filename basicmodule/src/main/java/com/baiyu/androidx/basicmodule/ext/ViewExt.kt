@@ -62,10 +62,10 @@ fun View.toBitmap(scale: Float = 1f, config: Bitmap.Config = Bitmap.Config.ARGB_
     }
     this.clearFocus()
     val bitmap = createBitmapSafely(
-            (width * scale).toInt(),
-            (height * scale).toInt(),
-            config,
-            1
+        (width * scale).toInt(),
+        (height * scale).toInt(),
+        config,
+        1
     )
     if (bitmap != null) {
         Canvas().run {

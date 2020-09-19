@@ -7,4 +7,4 @@ package com.baiyu.androidx.basicmodule.network
  * @date 2020-05-09
  */
 class ApiException(val errorMessage: String, val errorCode: Int) :
-        Throwable()
+    Throwable()

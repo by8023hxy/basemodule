@@ -2,7 +2,7 @@ package com.baiyu.androidx.basicmodule.network
 
 
 fun <T> executeResponse(
-        response: BaseResponse<T>
+    response: BaseResponse<T>
 ): NetResponse<T> {
     return if (response.isSuccess()) {
         NetResponse.Success(response)
@@ -18,7 +18,7 @@ fun <T> executeResponse(
  */
 @SuspensionFunction
 suspend fun <T> NetResponse<T>.suspendOnSuccess(
-        onResult: suspend NetResponse.Success<T>.() -> Unit
+    onResult: suspend NetResponse.Success<T>.() -> Unit
 ): NetResponse<T> {
     if (this is NetResponse.Success) {
         onResult(this)

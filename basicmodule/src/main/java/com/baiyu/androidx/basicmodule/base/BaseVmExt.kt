@@ -24,10 +24,10 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 fun <T> BaseViewModel.flowRequest(
-        request: suspend () -> Flow<T>,
-        resultState: StatefulMutableLiveData<T>,
-        isShowDialog: Boolean = true,
-        loadingMessage: String = "数据加载中..."
+    request: suspend () -> Flow<T>,
+    resultState: StatefulMutableLiveData<T>,
+    isShowDialog: Boolean = true,
+    loadingMessage: String = "数据加载中..."
 ) {
     viewModelScope.launch(Dispatchers.IO) {
         request().onStart {
@@ -52,7 +52,7 @@ fun <T> BaseViewModel.flowRequestNoCheck(
     isShowDialog: Boolean = true,
     loadingMessage: String = "数据加载中..."
 ) {
-    viewModelScope.launch(Dispatchers.IO)  {
+    viewModelScope.launch(Dispatchers.IO) {
         request().onStart {
             if (isShowDialog) loadingChange.showDialog.postEventValue(loadingMessage)
         }.onCompletion {

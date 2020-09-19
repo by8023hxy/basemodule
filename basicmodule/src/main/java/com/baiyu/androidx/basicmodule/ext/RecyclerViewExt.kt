@@ -1,11 +1,9 @@
 package com.baiyu.androidx.basicmodule.ext
 
 import android.graphics.Color
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.baiyu.androidx.basicmodule.view.decoration.GridSpacingItemDecoration
 import com.baiyu.androidx.basicmodule.view.decoration.HorizontalDecoration
-import com.baiyu.androidx.basicmodule.view.decoration.SpaceItemDecoration
 
 
 fun RecyclerView.itemDecoration() {
@@ -17,7 +15,8 @@ fun RecyclerView.itemDecoration() {
             .setFirstPaddingLeft(0f)
             .setFirstPaddingRight(0f)
             .setShowFirst(false)
-            .setShowLast(false))
+            .setShowLast(false)
+    )
 }
 
 fun RecyclerView.itemDecorationGrid(count: Int = 4, horizontal: Int = 20, vertical: Int = 10) {

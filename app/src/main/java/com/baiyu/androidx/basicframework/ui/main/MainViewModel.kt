@@ -16,12 +16,13 @@ class MainViewModel(private val repository: AppRepository) : LiveCoroutinesViewM
 
     private val _bannerList = MutableLiveData<Boolean>()
 
-    val bannerList=_bannerList.switchMap {
+    val bannerList = _bannerList.switchMap {
         launchOnViewModelScope { repository.getBannerList().asLiveData() }
     }
 
-    fun getBannerList(){
-        _bannerList.value=true
+    fun getBannerList() {
+        _bannerList.value = true
     }
+
     fun isLoading(): LiveData<Boolean> = repository.isLoading
 }

@@ -15,25 +15,25 @@ private enum class LEVEL {
 }
 
 fun String.logV(tag: String = TAG) =
-        log(LEVEL.V, TAG + tag, this)
+    log(LEVEL.V, TAG + tag, this)
 
 fun String.logD(tag: String = TAG) =
-        log(LEVEL.D, TAG + tag, this)
+    log(LEVEL.D, TAG + tag, this)
 
 fun String.logI(tag: String = TAG) =
-        log(LEVEL.I, TAG + tag, this)
+    log(LEVEL.I, TAG + tag, this)
 
 fun String.logW(tag: String = TAG) =
-        log(LEVEL.W, TAG + tag, this)
+    log(LEVEL.W, TAG + tag, this)
 
 fun String.logE(tag: String = TAG) =
-        log(LEVEL.E, TAG + tag, this)
+    log(LEVEL.E, TAG + tag, this)
 
 private fun log(level: LEVEL, tag: String, message: String) {
     if (!showLog) return
     val tagBuilder = StringBuilder()
     tagBuilder.append(tag)
-    if (showStackTrace){
+    if (showStackTrace) {
         val stackTrace = Thread.currentThread().stackTrace[5]
         tagBuilder.append(" ${stackTrace.methodName}(${stackTrace.fileName}:${stackTrace.lineNumber})")
     }

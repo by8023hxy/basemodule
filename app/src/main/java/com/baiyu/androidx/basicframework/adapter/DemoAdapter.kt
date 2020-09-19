@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.baiyu.androidx.basicframework.R
 import com.baiyu.androidx.basicframework.bean.BannerInfo
 import com.baiyu.androidx.basicframework.databinding.ItemDemoBinding
-import com.baiyu.androidx.basicmodule.base.BaseApp
 import com.baiyu.androidx.basicmodule.ext.toast
 
 
@@ -33,7 +32,7 @@ class DemoAdapter : RecyclerView.Adapter<DemoAdapter.DemoViewHolder>() {
             banner = item
             executePendingBindings()
             root.setOnClickListener {
-               it.context.toast(item.title)
+                it.context.toast(item.title)
             }
         }
     }

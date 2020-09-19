@@ -16,15 +16,14 @@ import kotlinx.coroutines.flow.flow
  */
 suspend fun <T> relateViewCommon(request: suspend () -> BaseResponse<T>): Flow<T> {
     return flow {
-        "flowUI onThread=${Thread.currentThread().name}".logD("Basic-->NetWorkThread")
         executeResponse(request()).suspendOnSuccess {
             emit(data)
         }.onFailure {
-            "flowUI onFailure==${message()}".logE()
+            "relateViewCommon onFailure==${message()}".logE()
         }
     }.catch {
         val apiException = ExceptionUtil.getApiException(it)
-        "flowUI CATCH==${apiException.errorMessage + apiException.errorCode}".logE()
+        "relateViewCommon catch==${apiException.errorMessage + apiException.errorCode}".logE()
     }
 }
 

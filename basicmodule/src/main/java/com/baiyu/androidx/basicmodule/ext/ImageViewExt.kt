@@ -18,62 +18,62 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget
  */
 fun ImageView.loadCornerSix(path: String) {
     Glide.with(this.context)
-            .load(path)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
-            .into(object : DrawableImageViewTarget(this) {
-                override fun setResource(resource: Drawable?) {
-                    super.setResource(resource)
-                    this.view.background = null
-                }
-            })
+        .load(path)
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
+        .into(object : DrawableImageViewTarget(this) {
+            override fun setResource(resource: Drawable?) {
+                super.setResource(resource)
+                this.view.background = null
+            }
+        })
 }
 
 fun ImageView.loadCornerSix(res: Int) {
     Glide.with(this.context)
-            .load(res)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
-            .into(object : DrawableImageViewTarget(this) {
-                override fun setResource(resource: Drawable?) {
-                    super.setResource(resource)
-                    this.view.background = null
-                }
-            })
+        .load(res)
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
+        .into(object : DrawableImageViewTarget(this) {
+            override fun setResource(resource: Drawable?) {
+                super.setResource(resource)
+                this.view.background = null
+            }
+        })
 }
 
 fun ImageView.loadCircle(path: String) {
     Glide.with(this.context)
-            .load(path)
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
-            .into(object : DrawableImageViewTarget(this) {
-                override fun setResource(resource: Drawable?) {
-                    super.setResource(resource)
-                    this.view.background = null
-                }
-            })
+        .load(path)
+        .apply(RequestOptions.bitmapTransform(CircleCrop()))
+        .into(object : DrawableImageViewTarget(this) {
+            override fun setResource(resource: Drawable?) {
+                super.setResource(resource)
+                this.view.background = null
+            }
+        })
 }
 
 fun ImageView.loadCircle(res: Int) {
     Glide.with(this.context)
-            .load(res)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
-            .into(object : DrawableImageViewTarget(this) {
-                override fun setResource(resource: Drawable?) {
-                    super.setResource(resource)
-                    this.view.background = null
-                }
-            })
+        .load(res)
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
+        .into(object : DrawableImageViewTarget(this) {
+            override fun setResource(resource: Drawable?) {
+                super.setResource(resource)
+                this.view.background = null
+            }
+        })
 }
 
 fun ImageView.loadNoDefault(path: String) {
     Glide.with(this.context)
-            .load(path)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
-            .into(object : DrawableImageViewTarget(this) {
-                override fun setResource(resource: Drawable?) {
-                    super.setResource(resource)
-                    this.view.background = null
-                }
-            })
+        .load(path)
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(6)))
+        .into(object : DrawableImageViewTarget(this) {
+            override fun setResource(resource: Drawable?) {
+                super.setResource(resource)
+                this.view.background = null
+            }
+        })
 }
 
 fun ImageView.loadDrawable(res: Int) {
