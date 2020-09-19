@@ -16,7 +16,6 @@ fun View.visible() {
     visibility = View.VISIBLE
 }
 
-
 /**
  * 设置view占位隐藏
  */

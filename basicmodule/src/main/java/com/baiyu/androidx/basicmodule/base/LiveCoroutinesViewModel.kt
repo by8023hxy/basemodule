@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.baiyu.androidx.basicmodule.event.RequestState
-import com.baiyu.androidx.basicmodule.livedata.postEventValue
 import kotlinx.coroutines.Dispatchers
 
 /**
@@ -13,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
  * @date :2020/9/13 12:04 PM September
  * @version: 1.0
  */
-abstract class LiveCoroutinesViewModel : BaseViewModel() {
+abstract class LiveCoroutinesViewModel : ViewModel() {
 
     inline fun <T> launchOnViewModelScope(crossinline block: suspend () -> LiveData<T>): LiveData<T> {
 

@@ -1,4 +1,4 @@
-package com.baiyu.androidx.basicmodule.util
+package com.baiyu.androidx.basicframework.util
 
 import com.baiyu.androidx.basicmodule.ext.boolean
 import com.baiyu.androidx.basicmodule.ext.logD

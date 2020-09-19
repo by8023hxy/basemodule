@@ -6,14 +6,10 @@ import com.baiyu.androidx.basicmodule.ext.logD
 import com.baiyu.androidx.basicmodule.ext.logE
 import com.baiyu.androidx.basicmodule.network.*
 import com.baiyu.androidx.basicmodule.util.ExceptionUtil
-import com.baiyu.androidx.basicmodule.util.MMKVUtil
+
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-
-private fun isLogin(): Boolean {
-    return MMKVUtil.kvUtil.loginState
-}
 
 /**
  * 失败需要和UI关联(共同处理)
@@ -21,17 +17,13 @@ private fun isLogin(): Boolean {
 suspend fun <T> relateViewCommon(request: suspend () -> BaseResponse<T>): Flow<T> {
     return flow {
         "flowUI onThread=${Thread.currentThread().name}".logD("Basic-->NetWorkThread")
-        if (isLogin()) {
-            //判断请求时，如果已登录的情况Token过期 要重新登录
-            throw ApiException("Token过期，请重新登录", -100)
-        } else {
-            executeResponse(request()).suspendOnSuccess {
-                emit(data)
-            }.onFailure {
-                BaseApp.shareViewModel.requestFailed.postValue(true)
-                "flowUI onFailure==${message()}".logE()
-            }
+
+        executeResponse(request()).suspendOnSuccess {
+            emit(data)
+        }.onFailure {
+            "flowUI onFailure==${message()}".logE()
         }
+
 
     }.catch {
         val apiException = ExceptionUtil.getApiException(it)
@@ -65,17 +57,14 @@ suspend fun <T> associatedView(
 ): Flow<T> {
     return flow {
         "flowNormal onThread=${Thread.currentThread().name}".logD("Basic-->NetWorkThread")
-        if (isLogin()) {
-            //判断请求时，如果已登录的情况Token过期 要重新登录
-            throw ApiException("Token过期，请重新登录", -100)
-        } else {
-            executeResponse(request()).suspendOnSuccess {
-                emit(data)
-            }.suspendOnFailure {
-                onError(ApiException(response.getResponseMsg(), response.getResponseCode()))
-                "flowNormal onFailure==${message()}".logE()
-            }
+
+        executeResponse(request()).suspendOnSuccess {
+            emit(data)
+        }.suspendOnFailure {
+            onError(ApiException(response.getResponseMsg(), response.getResponseCode()))
+            "flowNormal onFailure==${message()}".logE()
         }
+
     }.catch {
         val apiException = ExceptionUtil.getApiException(it)
         "flowNormal CATCH==${apiException.errorMessage + apiException.errorCode}".logE()

@@ -9,6 +9,8 @@ import com.baiyu.androidx.basicframework.view.ProgressDialogFragment
 import com.baiyu.androidx.basicmodule.base.BaseVMActivity
 import kotlinx.coroutines.delay
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : BaseVMActivity() {
 

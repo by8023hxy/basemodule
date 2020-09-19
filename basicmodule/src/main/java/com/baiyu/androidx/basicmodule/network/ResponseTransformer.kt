@@ -1,76 +1,69 @@
 package com.baiyu.androidx.basicmodule.network
 
-/**
- * @ProjectName:AgentHmi
- * @Author:BaiYu
- * @Email:baiyu@autoai.com
- * @Time:2020/8/19 14:58
- * @description：
- */
 
 fun <T> executeResponse(
         response: BaseResponse<T>
-): MusicResponse<T> {
+): NetResponse<T> {
     return if (response.isSuccess()) {
-        MusicResponse.Success(response)
+        NetResponse.Success(response)
     } else {
-        MusicResponse.Failure(response)
+        NetResponse.Failure(response)
     }
 }
 
 
 /**
- * A suspend scope function for handling success response [MusicResponse.Success] a unit
+ * A suspend scope function for handling success response [NetResponse.Success] a unit
  * block of code within the context of the response.
  */
 @SuspensionFunction
-suspend fun <T> MusicResponse<T>.suspendOnSuccess(
-        onResult: suspend MusicResponse.Success<T>.() -> Unit
-): MusicResponse<T> {
-    if (this is MusicResponse.Success) {
+suspend fun <T> NetResponse<T>.suspendOnSuccess(
+        onResult: suspend NetResponse.Success<T>.() -> Unit
+): NetResponse<T> {
+    if (this is NetResponse.Success) {
         onResult(this)
     }
     return this
 }
 
 /**
- * A suspend scope function for handling failure response [MusicResponse.Failure] a unit
+ * A suspend scope function for handling failure response [NetResponse.Failure] a unit
  * block of code within the context of the response.
  */
 @SuspensionFunction
-suspend fun <T> MusicResponse<T>.suspendOnFailure(onResult: suspend MusicResponse.Failure<*>.() -> Unit): MusicResponse<T> {
-    if (this is MusicResponse.Failure<*>) {
+suspend fun <T> NetResponse<T>.suspendOnFailure(onResult: suspend NetResponse.Failure<*>.() -> Unit): NetResponse<T> {
+    if (this is NetResponse.Failure<*>) {
         onResult(this)
     }
     return this
 }
 
 /**
- * A scope function for handling failure response [MusicResponse.Failure] a unit
+ * A scope function for handling failure response [NetResponse.Failure] a unit
  * block of code within the context of the response.
  */
-fun <T> MusicResponse<T>.onFailure(onResult: MusicResponse.Failure<*>.() -> Unit): MusicResponse<T> {
-    if (this is MusicResponse.Failure<*>) {
+fun <T> NetResponse<T>.onFailure(onResult: NetResponse.Failure<*>.() -> Unit): NetResponse<T> {
+    if (this is NetResponse.Failure<*>) {
         onResult(this)
     }
     return this
 }
 
 /**
- * A scope function for handling exception response [MusicResponse.Exception] a unit
+ * A scope function for handling exception response [NetResponse.Exception] a unit
  * block of code within the context of the response.
  */
-fun <T> MusicResponse<T>.onException(onResult: MusicResponse.Exception<*>.() -> Unit): MusicResponse<T> {
-    if (this is MusicResponse.Exception<*>) {
+fun <T> NetResponse<T>.onException(onResult: NetResponse.Exception<*>.() -> Unit): NetResponse<T> {
+    if (this is NetResponse.Exception<*>) {
         onResult(this)
     }
     return this
 }
 
 
-/** A message from the [MusicResponse.Failure]. */
-fun <T> MusicResponse.Failure<T>.message(): String = toString()
+/** A message from the [NetResponse.Failure]. */
+fun <T> NetResponse.Failure<T>.message(): String = toString()
 
-/** A message from the [MusicResponse.Exception]. */
-fun <T> MusicResponse.Exception<T>.message(): String = toString()
+/** A message from the [NetResponse.Exception]. */
+fun <T> NetResponse.Exception<T>.message(): String = toString()
 
