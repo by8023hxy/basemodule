@@ -6,6 +6,13 @@ import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
+/**
+ * @ProjectName:AgentHmi
+ * @Author:BaiYu
+ * @Email:baiyu@autoai.com
+ * @Time:2020/7/15 11:01
+ * @description：
+ */
 class CoroutineCallAdapterFactory private constructor() : CallAdapter.Factory() {
     companion object {
         @JvmStatic

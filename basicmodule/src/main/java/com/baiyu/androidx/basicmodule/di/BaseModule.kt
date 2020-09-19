@@ -1,18 +1,20 @@
-package com.baiyu.androidx.basicframework.di
+@file:Suppress("unused")
 
-import com.baiyu.androidx.basicframework.http.RemoteService
-import com.baiyu.androidx.basicframework.repository.AppRepository
-import com.baiyu.androidx.basicframework.ui.main.MainViewModel
+package com.baiyu.androidx.basicmodule.di
+
 import com.baiyu.androidx.basicmodule.BaseConstant
+import com.baiyu.androidx.basicmodule.ShareViewModel
 import com.baiyu.androidx.basicmodule.base.BaseApp
 import com.baiyu.androidx.basicmodule.interceptor.CacheInterceptor
 import com.baiyu.androidx.basicmodule.interceptor.CacheNetworkInterceptor
 import com.baiyu.androidx.basicmodule.interceptor.logger.LogInterceptor
+import com.baiyu.androidx.basicmodule.network.ApiService
 import com.baiyu.androidx.basicmodule.network.CoroutineCallAdapterFactory
+import com.baiyu.androidx.basicmodule.util.MMKVUtil
 import com.google.gson.GsonBuilder
+import com.tencent.mmkv.MMKV
 import okhttp3.Cache
 import okhttp3.OkHttpClient
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,20 +23,33 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 /**
- * @author Baiyu
- * @date :2020/9/13 1:05 PM September
- * @version: 1.0
+ * @ProjectName:AgentHmi
+ * @Author:BaiYu
+ * @Email:baiyu@autoai.com
+ * @Time:2020/7/20 8:54
+ * @description：Koin注入
  */
+val baseModule = module {
 
-val viewModelModule = module {
-    viewModel { MainViewModel(get()) }
+    single {
+        ShareViewModel()
+    }
+    single {
+        MMKVUtil(get())
+    }
+    single<MMKV> {
+        MMKV.mmkvWithID(
+                BaseConstant.MMKV_ID,
+                MMKV.MULTI_PROCESS_MODE,
+            BaseConstant.MMKV_CRYPT_KEY)
+    }
 }
 
 val repositoryModule = module {
-    single { AppRepository(get()) }
+
 }
 
-val httpModule = module {
+val netWorkModule = module {
     single<OkHttpClient> {
         OkHttpClient.Builder()
             .cache(Cache(File(BaseApp.CONTEXT.cacheDir, "by_cache"), 1024 * 1024 * 256L))
@@ -52,20 +67,16 @@ val httpModule = module {
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .baseUrl(RemoteService.BASE_URL)
+            .baseUrl(BaseConstant.BASE_URL)
             .build()
     }
-    single<RemoteService> {
+    single<ApiService> {
         Retrofit.Builder()
             .client(get())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .baseUrl(RemoteService.BASE_URL)
-            .build().create(RemoteService::class.java)
+            .baseUrl(BaseConstant.BASE_URL)
+            .build().create(ApiService::class.java)
     }
 }
-val applicationModules = listOf(
-    viewModelModule,
-    repositoryModule, httpModule
-)

@@ -5,7 +5,16 @@ import android.app.Application
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import com.baiyu.androidx.basicmodule.ShareViewModel
+import com.baiyu.androidx.basicmodule.di.baseModule
+import com.baiyu.androidx.basicmodule.di.netWorkModule
 import com.baiyu.androidx.basicmodule.ext.logD
+import com.tencent.mmkv.MMKV
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidFileProperties
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.HttpsURLConnection
@@ -19,6 +28,12 @@ import javax.net.ssl.X509TrustManager
  * @version: 1.0
  */
 open class BaseApp : Application(), ViewModelStoreOwner {
+    companion object {
+        @JvmStatic
+        lateinit var CONTEXT: BaseApp
+        @JvmStatic
+        val shareViewModel: ShareViewModel by lazy { ShareViewModel() }
+    }
 
     private lateinit var mAppViewModelStore: ViewModelStore
 
@@ -32,6 +47,14 @@ open class BaseApp : Application(), ViewModelStoreOwner {
         super.onCreate()
         "BaseApp  onCreate!!!!".logD()
         mAppViewModelStore = ViewModelStore()
+        CONTEXT = this
+        MMKV.initialize(this)
+        startKoin {
+            androidLogger(Level.NONE)
+            androidContext(this@BaseApp)
+            androidFileProperties()
+            modules(baseModule)
+        }
         ignoreSSLHandshake()
     }
 
