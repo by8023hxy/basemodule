@@ -1,6 +1,6 @@
+@file:Suppress("unused")
+
 package com.baiyu.androidx.basicmodule.view.decoration
-
-
 
 /**
  * 每个视图项的四个边，the four borders of itemView

@@ -1,7 +1,7 @@
-package com.baiyu.androidx.basicframework;
+package com.baiyu.androidx.basicframework
 
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 
 /**
  * @author Baiyu
@@ -9,9 +9,8 @@ import com.bumptech.glide.module.AppGlideModule;
  * @version: 1.0
  */
 @GlideModule
-public class GeneratedAppGlideModule extends AppGlideModule {
-    @Override
-    public boolean isManifestParsingEnabled() {
-        return false;
+class GeneratedAppGlideModule : AppGlideModule() {
+    override fun isManifestParsingEnabled(): Boolean {
+        return false
     }
 }

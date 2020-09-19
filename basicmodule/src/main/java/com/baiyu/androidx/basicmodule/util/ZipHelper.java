@@ -134,7 +134,7 @@ public class ZipHelper {
      * zlib compress 2 byte
      */
     public static byte[] compressForZlib(String stringToCompress) {
-        byte[] returnValues = null;
+        byte[] returnValues;
 
         returnValues = compressForZlib
                 (

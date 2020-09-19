@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.baiyu.androidx.basicmodule.view.decoration
 
 import android.graphics.Color
