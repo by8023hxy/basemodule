@@ -32,7 +32,7 @@ basemodule是基于Android应用程序技术栈Jetpack封装的基础模块，�
   - Repository pattern 数据仓库
 - [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - construct the REST APIs and paging network data.
 - [Glide](https://github.com/bumptech/glide) (https://github.com/florent37/GlidePalette) - loading images.
-- [Gson] 用于Json解析
+- Gson   操作java对象和json数据之间的相互转换
 
 
 
