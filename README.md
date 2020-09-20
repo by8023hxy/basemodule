@@ -20,7 +20,7 @@ basemodule是基于Android应用程序技术栈Jetpack封装的基础模块，�
 
 ## 技术栈和开源库
 - Minimum SDK level 26
-- [Kotlin](https://kotlinlang.org/) based + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) for asynchronous.
+- [Kotlin](https://kotlinlang.org/) based + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)+[Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow) for asynchronous.
 - Koin 依赖注入框架
 - JetPack
   - LiveData - notify domain layer data to views.
