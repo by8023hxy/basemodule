@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.forEach
 import androidx.databinding.DataBindingUtil
@@ -25,12 +24,6 @@ import com.baiyu.androidx.basicmodule.ext.logD
 abstract class DataBindingFragment : Fragment() {
 
     lateinit var appCompatActivity: AppCompatActivity
-
-    protected inline fun <reified T : ViewDataBinding> binding(
-        inflater: LayoutInflater,
-        @LayoutRes resId: Int,
-        container: ViewGroup?
-    ): T = DataBindingUtil.inflate(inflater, resId, container, false)
 
     protected abstract fun getDataBindingConfig(): DataBindingConfig
 

@@ -93,7 +93,7 @@ publish {
     groupId = 'com.baiyu'//jcenter上的路径
     artifactId = 'basic-jetpeck-module'//项目名称
     publishVersion = '1.0.2'//版本号
-    desc = 'jetpeck基础模块'//描述，不重要
+    desc = 'jetpack基础模块'//描述，不重要
     website = siteUrl//项目主页
 }
 tasks.withType(Javadoc) {//防止编码问题

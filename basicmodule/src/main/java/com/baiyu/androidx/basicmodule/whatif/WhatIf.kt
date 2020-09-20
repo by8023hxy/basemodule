@@ -2,13 +2,6 @@
 
 package com.baiyu.androidx.basicmodule.whatif
 
-/**
- * @ProjectName:AgentHmi
- * @Author:BaiYu
- * @Email:baiyu@autoai.com
- * @Time:2020/8/20 15:15
- * @description：
- */
 
 /**
  * WhatIf is kotlin extensions for expressing a single if-else statement, nullable and boolean.
