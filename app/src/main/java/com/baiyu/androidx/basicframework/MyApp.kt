@@ -1,7 +1,6 @@
 package com.baiyu.androidx.basicframework
 
 import com.baiyu.androidx.basicframework.di.applicationModules
-import com.baiyu.androidx.basicmodule.ShareViewModel
 import com.baiyu.androidx.basicmodule.base.BaseApp
 import com.baiyu.androidx.basicmodule.ext.logD
 import com.tencent.mmkv.MMKV
@@ -20,9 +19,6 @@ class MyApp : BaseApp() {
     companion object {
         @JvmStatic
         lateinit var CONTEXT: BaseApp
-
-        @JvmStatic
-        val shareViewModel: ShareViewModel by lazy { ShareViewModel() }
     }
 
     override fun onCreate() {

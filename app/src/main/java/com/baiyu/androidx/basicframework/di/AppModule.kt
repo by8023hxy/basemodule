@@ -6,7 +6,6 @@ import com.baiyu.androidx.basicframework.repository.AppRepository
 import com.baiyu.androidx.basicframework.ui.main.MainViewModel
 import com.baiyu.androidx.basicframework.util.MMKVUtil
 import com.baiyu.androidx.basicmodule.BaseConstant
-import com.baiyu.androidx.basicmodule.ShareViewModel
 import com.baiyu.androidx.basicmodule.interceptor.CacheInterceptor
 import com.baiyu.androidx.basicmodule.interceptor.CacheNetworkInterceptor
 import com.baiyu.androidx.basicmodule.interceptor.logger.LogInterceptor
@@ -30,9 +29,6 @@ import java.util.concurrent.TimeUnit
 
 val baseModule = module {
 
-    single {
-        ShareViewModel()
-    }
     single {
         MMKVUtil(get())
     }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loading_msg">正在获取数据……</string>
+    <string name="retry_msg">重试</string>
+    <string name="load_fail_msg">加载失败</string>
+    <string name="no_data">暂无数据</string>
+
+</resources>

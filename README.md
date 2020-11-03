@@ -14,7 +14,7 @@ basemodule是基于Android应用程序技术栈Jetpack封装的基础模块，�
  Add a dependency code to your **module**'s `build.gradle` file.
  ```gradle
  dependencies {
-     implementation 'com.baiyu:basic-jetpeck-module:1.0.2'
+     implementation 'com.baiyu:basic-jetpeck-module:1.0.3'
  }
 ```
 
