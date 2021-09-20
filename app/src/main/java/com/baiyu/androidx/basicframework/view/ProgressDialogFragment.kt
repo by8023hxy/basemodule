@@ -10,6 +10,9 @@ import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
 import com.baiyu.androidx.basicframework.R
 
+/**
+ * dialog
+ */
 class ProgressDialogFragment : DialogFragment() {
 
     var dialogView: View? = null
