@@ -14,4 +14,12 @@ object BaseConstant {
     const val HTTP_WRITE_TIME: Long = 30
 
     const val BASE_URL = ""
+
+    const val UNKNOWN_ERROR = 9000
+
+    const val NET_ERROR = 9001
+
+    const val JSON_ERROR = 9002
+
+    const val COROUTINE_ERROR = 9003
 }

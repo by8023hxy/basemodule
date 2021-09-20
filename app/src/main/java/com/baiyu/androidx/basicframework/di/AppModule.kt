@@ -6,14 +6,15 @@ import com.baiyu.androidx.basicframework.repository.AppRepository
 import com.baiyu.androidx.basicframework.ui.main.MainViewModel
 import com.baiyu.androidx.basicframework.util.MMKVUtil
 import com.baiyu.androidx.basicmodule.BaseConstant
+import com.baiyu.androidx.basicmodule.ext.logD
 import com.baiyu.androidx.basicmodule.interceptor.CacheInterceptor
 import com.baiyu.androidx.basicmodule.interceptor.CacheNetworkInterceptor
-import com.baiyu.androidx.basicmodule.interceptor.logger.LogInterceptor
 import com.baiyu.androidx.basicmodule.network.CoroutineCallAdapterFactory
 import com.google.gson.GsonBuilder
 import com.tencent.mmkv.MMKV
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -28,7 +29,6 @@ import java.util.concurrent.TimeUnit
  */
 
 val baseModule = module {
-
     single {
         MMKVUtil(get())
     }
@@ -52,9 +52,11 @@ val repositoryModule = module {
 val httpModule = module {
     single<OkHttpClient> {
         OkHttpClient.Builder()
-            .cache(Cache(File(MyApp.CONTEXT.cacheDir, "by_cache"), 1024 * 1024 * 256L))
+            .cache(Cache(File(MyApp.CONTEXT.cacheDir, "okhttp_cache"), 1024 * 1024 * 256L))
             .addInterceptor(CacheInterceptor())
-            .addInterceptor(LogInterceptor())    // 日志拦截器
+            .addInterceptor(HttpLoggingInterceptor { message -> message.logD("MyHttpLog") }.apply {
+                this.level = HttpLoggingInterceptor.Level.BODY
+            })    // 日志拦截器
             .addNetworkInterceptor(CacheNetworkInterceptor())
             .connectTimeout(BaseConstant.HTTP_CONNECT_TIME, TimeUnit.SECONDS)
             .readTimeout(BaseConstant.HTTP_READ_TIME, TimeUnit.SECONDS)
@@ -72,7 +74,8 @@ val httpModule = module {
 }
 
 val applicationModules = listOf(
+    httpModule,
     baseModule,
     viewModelModule,
-    repositoryModule, httpModule
+    repositoryModule
 )

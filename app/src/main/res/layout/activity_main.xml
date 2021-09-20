@@ -27,7 +27,7 @@
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
             app:adapter="@{adapter}"
-            app:adapterBannerList="@{vm.getBannerList}"
+            app:adapterBannerList="@{vm.banner}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -14,7 +14,7 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 /**
- * @author Baiyu
+ * @author BaiYu
  * @date :2020/9/13 12:55 PM September
  * @version: 1.0
  */
@@ -56,7 +56,7 @@ open class BaseApp : Application(), ViewModelStoreOwner {
     private fun ignoreSSLHandshake() {
         try {
             val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-                override fun getAcceptedIssuers(): Array<X509Certificate?>? {
+                override fun getAcceptedIssuers(): Array<X509Certificate?> {
                     return arrayOfNulls(0)
                 }
 

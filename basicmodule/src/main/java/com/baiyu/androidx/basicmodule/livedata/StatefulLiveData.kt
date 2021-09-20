@@ -1,5 +1,4 @@
 @file:Suppress("unused")
-
 package com.baiyu.androidx.basicmodule.livedata
 
 import androidx.annotation.MainThread
@@ -7,7 +6,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
-import com.baiyu.androidx.basicmodule.event.RequestState
 import com.baiyu.androidx.basicmodule.network.ApiException
 
 typealias StatefulLiveData<T> = LiveData<RequestState<T>>
@@ -29,13 +27,13 @@ inline fun <T> StatefulLiveData<T>.observeState(
     }
 }
 
+
 @MainThread
-inline fun <T> StatefulLiveData<T>.observeState(
+inline fun <T> StatefulLiveData<T>.observeStatus(
     owner: LifecycleOwner,
     init: ResultBuilder<T>.() -> Unit
 ) {
     val result = ResultBuilder<T>().apply(init)
-
     observe(owner) { state ->
         when (state) {
             is RequestState.Loading -> result.onLoading.invoke()

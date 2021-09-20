@@ -1,43 +1,21 @@
 package com.baiyu.androidx.basicframework.ui.main
 
-import androidx.activity.viewModels
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
-import com.baiyu.androidx.basicframework.BR
 import com.baiyu.androidx.basicframework.R
 import com.baiyu.androidx.basicframework.adapter.DemoAdapter
+import com.baiyu.androidx.basicframework.databinding.ActivityMainBinding
 import com.baiyu.androidx.basicframework.view.ProgressDialogFragment
-
-import com.baiyu.androidx.basicmodule.base.DataBindingActivity
-import com.baiyu.androidx.basicmodule.base.config.DataBindingConfig
+import com.baiyu.androidx.basicmodule.base.easydatabind.BaseBindingActivity
+import com.baiyu.androidx.basicmodule.livedata.observeState
 import kotlinx.coroutines.delay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : DataBindingActivity() {
+class MainActivity : BaseBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val mainViewModel: MainViewModel by viewModel()
 
     private val dialog: ProgressDialogFragment by lazy { ProgressDialogFragment() }
-    override fun getDataBindingConfig(): DataBindingConfig {
-        return DataBindingConfig(R.layout.activity_main, BR.vm, mainViewModel)
-            .addBindingParam(BR.adapter, DemoAdapter())
-    }
-
-    override fun initView() {
-        mainViewModel.apply {
-            getBannerList()
-        }
-    }
-
-    override fun initData() {
-
-    }
-
-    override fun setObserve() {
-        mainViewModel.isLoading().observe(this, {
-            operateDialog(it)
-        })
-    }
 
     private fun operateDialog(isShow: Boolean) {
         val fm: FragmentManager = supportFragmentManager
@@ -51,5 +29,26 @@ class MainActivity : DataBindingActivity() {
                 dialog.dismissAllowingStateLoss()
             }
         }
+    }
+
+    override fun afterViews() {
+        binding {
+            lifecycleOwner = this@MainActivity
+            adapter = DemoAdapter()
+            vm = mainViewModel.apply {
+                getBannerList()
+            }
+        }
+    }
+
+    override fun initObserver() {
+        mainViewModel.bannerList.observeState(this, onLoading = {
+            operateDialog(true)
+        }, onSuccess = {
+            mainViewModel.banner.set(it)
+            operateDialog(false)
+        }, onError = {
+            operateDialog(false)
+        })
     }
 }

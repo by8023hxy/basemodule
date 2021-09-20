@@ -4,7 +4,6 @@ package com.baiyu.androidx.basicmodule.livedata
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.*
-import com.baiyu.androidx.basicmodule.event.Event
 
 
 //为 LiveData<Event<T>>提供类型别名，使用 EventLiveData<T> 即可
