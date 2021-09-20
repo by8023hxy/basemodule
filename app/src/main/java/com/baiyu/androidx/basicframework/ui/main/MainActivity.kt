@@ -1,5 +1,6 @@
 package com.baiyu.androidx.basicframework.ui.main
 
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import com.baiyu.androidx.basicframework.BR
