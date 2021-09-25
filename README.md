@@ -89,30 +89,34 @@ class MainActivity : DataBindingActivity() {
 ### Repository
 
 ```kotlin
-suspend fun <T> relateViewCommon(request: suspend () -> BaseResponse<T>): Flow<T> {
+inline fun <T> flowScope(crossinline request: suspend () -> BaseResponse<T>): LiveData<RequestState<T>> {
     return flow {
-        executeResponse(request()).suspendOnSuccess {
-            emit(data)
-        }.onFailure {
-            "relateViewCommon onFailure==${message()}".logE()
+        "flowScope onThread=${Thread.currentThread().name}".logD(TAG)
+        val response = request()
+        "flowScope response=${Gson().toJson(response)}".logD(TAG)
+        if (response.isSuccess()) {
+            emit(RequestState.Success(response.getResponseData()))
+        } else {
+            emit(
+                RequestState.Error(
+                    ApiException(
+                        response.getResponseMsg(),
+                        response.getResponseCode()
+                    )
+                )
+            )
         }
+    }.onStart {
+        emit(RequestState.Loading)
     }.catch {
-        val apiException = ExceptionUtil.getApiException(it)
-        "relateViewCommon catch==${apiException.errorMessage + apiException.errorCode}".logE()
-    }
+        val apiException = getApiException(it)
+        "flowScope exception==${Gson().toJson(it)}".logE()
+        emit(RequestState.Error(apiException))
+    }.asLiveData()
 }
 
-class AppRepository(private val remoteService: RemoteService) : Repository {
-    suspend fun getBannerList(id:String) = flow {
-        isLoading.postValue(true)
-        relateViewCommon { remoteService.getBanner(id) }
-            .collect {
-                emit(it)
-                isLoading.postValue(false)
-            }
-    }.flowOn(Dispatchers.IO)
-
-    override var isLoading: BooleanLiveData = BooleanLiveData()
+class AppRepository(private val remoteService: RemoteService) {
+    suspend fun getBannerList(id:String) = flowScope { remoteService.getBanner() }
 }
 ```
 
@@ -121,16 +125,18 @@ class AppRepository(private val remoteService: RemoteService) : Repository {
 ```kotlin
 class MainViewModel(private val repository: AppRepository) : LiveCoroutinesViewModel() {
 
+    val banner: ObservableField<List<BannerInfo>> = ObservableField()
+
     private val _bannerList = MutableLiveData<String>()
 
     val bannerList=_bannerList.switchMap {
-        launchOnViewModelScope { repository.getBannerList(it).asLiveData() }
+        launchOnViewModelScope { repository.getBannerList() }
     }
 
     fun getBannerList(id:String){
         _bannerList.value=id
     }
-    fun isLoading(): LiveData<Boolean> = repository.isLoading
+
 }
 ```
 
@@ -173,17 +179,19 @@ val repositoryModule = module {
 }
 
 val httpModule = module {
-    single<OkHttpClient> {
-        OkHttpClient.Builder()
-            .cache(Cache(File(MyApp.CONTEXT.cacheDir, "by_cache"), 1024 * 1024 * 256L))
-            .addInterceptor(CacheInterceptor())
-            .addInterceptor(LogInterceptor())    // 日志拦截器
-            .addNetworkInterceptor(CacheNetworkInterceptor())
-            .connectTimeout(BaseConstant.HTTP_CONNECT_TIME, TimeUnit.SECONDS)
-            .readTimeout(BaseConstant.HTTP_READ_TIME, TimeUnit.SECONDS)
-            .writeTimeout(BaseConstant.HTTP_WRITE_TIME, TimeUnit.SECONDS)
-            .build()
-    }
+     single<OkHttpClient> {
+           OkHttpClient.Builder()
+               .cache(Cache(File(MyApp.CONTEXT.cacheDir, "okhttp_cache"), 1024 * 1024 * 256L))
+               .addInterceptor(CacheInterceptor())
+               .addInterceptor(HttpLoggingInterceptor { message -> message.logD("MyHttpLog") }.apply {
+                   this.level = HttpLoggingInterceptor.Level.BODY
+               })    // 日志拦截器
+               .addNetworkInterceptor(CacheNetworkInterceptor())
+               .connectTimeout(BaseConstant.HTTP_CONNECT_TIME, TimeUnit.SECONDS)
+               .readTimeout(BaseConstant.HTTP_READ_TIME, TimeUnit.SECONDS)
+               .writeTimeout(BaseConstant.HTTP_WRITE_TIME, TimeUnit.SECONDS)
+               .build()
+       }
     single<RemoteService> {
         Retrofit.Builder()
             .client(get())
