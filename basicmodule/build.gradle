@@ -2,7 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.novoda.bintray-release'//添加
+apply plugin: 'com.github.dcendents.android-maven' //必加
+group='com.github.by8023hxy'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -85,18 +86,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
 }
-//def siteUrl = 'https://github.com/by8023hxy/basemodule'
-//publish {
-//    repoName = 'BaiyuMaven'//远程仓库名字,不指明，默认是上传到maven
-//    userOrg = 'baiyu0502'//bintray.com的用户名
-//    groupId = 'com.baiyu'//jcenter上的路径
-//    artifactId = 'basic-jetpeck-module'//项目名称
-//    publishVersion = '1.0.3'//版本号
-//    desc = 'jetpack基础模块'//描述，不重要
-//    website = siteUrl//项目主页
-//}
-//tasks.withType(Javadoc) {//防止编码问题
-//    options.addStringOption('Xdoclint:none', '-quiet')
-//    options.addStringOption('encoding', 'UTF-8')
-//    options.addStringOption('charSet', 'UTF-8')
-//}
+
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}

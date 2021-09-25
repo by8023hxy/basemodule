@@ -13,9 +13,17 @@ basemodule是基于Android应用程序技术栈Jetpack封装的基础模块，�
 ## Gradle
  Add a dependency code to your **module**'s `build.gradle` file.
  ```gradle
+ Step 1. Add the JitPack repository to your build file
+ allprojects {
+ 		repositories {
+ 			...
+ 			maven { url 'https://jitpack.io' }
+ 		}
+ 	}
+ 	Step 2. Add the dependency
  dependencies {
-     implementation 'com.baiyu:basic-jetpeck-module:1.0.3'
- }
+ 	        implementation 'com.github.by8023hxy:basemodule:Tag'
+ 	}
 ```
 
 ## 技术栈和开源库
