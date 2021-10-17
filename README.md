@@ -1,3 +1,5 @@
+
+Version：[![](https://jitpack.io/v/by8023hxy/basemodule.svg)](https://jitpack.io/#by8023hxy/basemodule)
 <h1 align="center">basemodule</h1>
 
 <p align="center">
