@@ -8,6 +8,7 @@ import com.baiyu.androidx.basicframework.databinding.ActivityMainBinding
 import com.baiyu.androidx.basicframework.view.ProgressDialogFragment
 import com.baiyu.androidx.basicmodule.base.easydatabind.BaseBindingActivity
 import com.baiyu.androidx.basicmodule.livedata.observeState
+import com.baiyu.androidx.basicmodule.livedata.observeStatus
 import kotlinx.coroutines.delay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,5 +51,11 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(R.layout.activity_
         }, onError = {
             operateDialog(false)
         })
+
+        mainViewModel.bannerList.observeStatus(this) {
+            onError = {}
+            onLoading = {}
+            onSuccess = {}
+        }
     }
 }

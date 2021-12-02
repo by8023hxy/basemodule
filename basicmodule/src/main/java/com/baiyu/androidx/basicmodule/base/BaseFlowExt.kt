@@ -6,17 +6,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.baiyu.androidx.basicmodule.BaseConstant
-import com.baiyu.androidx.basicmodule.livedata.RequestState
 import com.baiyu.androidx.basicmodule.ext.logD
 import com.baiyu.androidx.basicmodule.ext.logE
+import com.baiyu.androidx.basicmodule.livedata.RequestState
 import com.baiyu.androidx.basicmodule.livedata.StatefulLiveData
 import com.baiyu.androidx.basicmodule.network.ApiException
 import com.baiyu.androidx.basicmodule.network.BaseResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -47,12 +45,11 @@ inline fun <T> flowScope(crossinline request: suspend () -> BaseResponse<T>): Li
         }
     }.onStart {
         emit(RequestState.Loading)
-    }.catch {
-        val apiException = getApiException(it)
-        "flowScope exception==${Gson().toJson(it)}".logE()
-        emit(RequestState.Error(apiException))
+    }.commonCatch {
+        emit(RequestState.Error(it))
     }.asLiveData()
 }
+
 
 /**
  * 使用liveData作用域返回一个StatefulLiveData
@@ -108,3 +105,14 @@ fun getApiException(throwable: Throwable): ApiException {
         }
     }
 }
+
+fun <T> Flow<T>.commonCatch(action: suspend FlowCollector<T>.(cause: ApiException) -> Unit): Flow<T> {
+    return this.catch {
+        val apiException = getApiException(it)
+        "commonCatch exception==$apiException".logE()
+        action(apiException)
+    }
+}
+
+
+

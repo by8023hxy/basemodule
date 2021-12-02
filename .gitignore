@@ -4,3 +4,4 @@
 /basicmodule/build
 /build/intermediates/lint-cache/
 /.gradle
+/local.properties
