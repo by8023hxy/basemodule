@@ -58,7 +58,7 @@ abstract class BindingFragment<T : ViewDataBinding> constructor(
   ): View {
     _binding = DataBindingUtil.inflate(inflater, contentLayoutId, container, false)
     return binding.apply {
-      lifecycleOwner=this@BindingFragment
+      lifecycleOwner=viewLifecycleOwner
     }.root
   }
 
