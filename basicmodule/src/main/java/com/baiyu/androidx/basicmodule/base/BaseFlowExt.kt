@@ -58,11 +58,11 @@ inline fun <T> liveDataScope(crossinline request: suspend () -> BaseResponse<T>)
     return liveData {
         "liveDataScope onThread=${Thread.currentThread().name}".logD(TAG)
         try {
-            RequestState.Loading
+            emit(RequestState.Loading)
             val response = request()
             "liveDataScope response=${Gson().toJson(response)}".logD(TAG)
             if (response.isSuccess()) {
-                RequestState.Success(response.getResponseData())
+                emit(RequestState.Success(response.getResponseData()))
             } else {
                 RequestState.Error(
                     ApiException(
@@ -73,7 +73,9 @@ inline fun <T> liveDataScope(crossinline request: suspend () -> BaseResponse<T>)
             }
         } catch (e: Exception) {
             "liveDataScope exception==$e".logE(TAG)
-            RequestState.Error(getApiException(e))
+            emit(
+                RequestState.Error(getApiException(e))
+            )
         }
     }
 }

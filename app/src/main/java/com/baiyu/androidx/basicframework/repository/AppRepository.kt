@@ -2,6 +2,7 @@ package com.baiyu.androidx.basicframework.repository
 
 import com.baiyu.androidx.basicframework.http.RemoteService
 import com.baiyu.androidx.basicmodule.base.flowScope
+import com.baiyu.androidx.basicmodule.base.liveDataScope
 
 /**
  * @author Baiyu
@@ -10,6 +11,6 @@ import com.baiyu.androidx.basicmodule.base.flowScope
  */
 class AppRepository(private val remoteService: RemoteService) {
 
-    suspend fun getBannerList() = flowScope { remoteService.getBanner() }
+    suspend fun getBannerList() = liveDataScope { remoteService.getBanner() }
 
 }
